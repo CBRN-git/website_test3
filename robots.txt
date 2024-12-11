@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://bioairg.info/sitemap-index.xml
