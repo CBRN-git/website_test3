@@ -1,0 +1,123 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import ProcessSteps from '~/components/widgets/ProcessSteps.astro';
+
+const metadata = {
+  title: 'Guideslines for Speakers',
+};
+
+const steps = [
+  {
+    title: "Acceptance of Presentation",
+    description: "Once your presentation is accepted, you'll receive a confirmation email with further instructions.",
+    icon: "tabler:square-number-1"
+  },
+  {
+    title: "Preparation for the Reading Group",
+    description: "Prepare your materials and familiarize yourself with the reading group format and expectations.",
+    icon: "tabler:square-number-2"
+  },
+  {
+    title: "Schedule Your Presentation Date",
+    description: "Coordinate with our team to schedule your presentation date that fits within our calendar.",
+    icon: "tabler:square-number-3"
+  },
+  {
+    title: "Finalize Your Slides",
+    description: "Complete your presentation slides and ensure they meet our guidelines for clarity and professionalism.",
+    icon: "tabler:square-number-4"
+  },
+  {
+    title: "You Share Your Slides with Us?",
+    description: "After your presentation, please share your slides with us to be featured on our website.",
+    icon: "tabler:square-number-5"
+  },
+  {
+    title: "For symmetry",
+    description: "XXX",
+    icon: "tabler:square-number-6"
+  },
+];
+---
+
+<Layout metadata={metadata}>
+    <!-- Hero Widget ******************* -->
+
+  <Hero
+  tagline="We want to say ..."
+>
+  <Fragment slot="title">
+    Thank you for presenting to our <br />
+    <span class="text-accent dark:text-white highlight"> reading group </span>
+  </Fragment>
+
+  <Fragment slot="subtitle">
+This page is designed to provide you with clear, step-by-step instructions to help you prepare and deliver your presentation effectively. By adhering to these guidelines, you ensure a smooth and engaging experience for both yourself and our audience. Additionally, our Frequently Asked Questions (FAQ) section is available to address any common queries you might have. Thank you for your valuable participation, and we look forward to discuss with you!
+  </Fragment>
+</Hero>
+
+<Features3
+    id="features"
+    title="How to prepare yourself for the big day ?"
+    tagline="Step-by-step guide to save time for YOU (and for us too 😊)."
+    columns={2}
+    items={steps}
+    image={{
+      src: '~/assets/images/guidelines_illustration3.webp',
+      alt: 'Colorful Image',
+    }}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+  title="Frequently Asked Questions"
+  subtitle="Find answers to common questions about the Mila Biology + AI Reading Group, its activities, and how you can get involved."
+  tagline="FAQs"
+  classes={{ container: 'max-w-6xl' }}
+  items={[
+    {
+      title: 'Who can join the Mila Biology + AI Reading Group?',
+      description:
+        'Anyone interested in the intersection of biology and AI can join, including PhD students, post-docs, principal investigators, and industry professionals.',
+    },
+    {
+      title: 'What topics are covered in the reading group?',
+      description:
+        'We focus on machine learning applications in bioinformatics, as well as related areas in ecology, evolutionary biology, conservation biology, physiology, and more.',
+    },
+    {
+      title: 'How can I become a speaker?',
+      description:
+        'Any member of the reading group, from PhD students to industry professionals, is welcome to present their work or discuss a paper of interest.',
+    },
+    {
+      title: 'How often do the meetings occur?',
+      description:
+        'We meet once every two weeks, usually from 3-4 pm, both virtually via Zoom and in-person at Mila.',
+    },
+    {
+      title: 'What is expected from participants?',
+      description:
+        'Participants are encouraged to read the selected papers beforehand and come prepared with observations and comments for discussion.',
+    },
+    {
+      title: 'How are meetings conducted?',
+      description:
+        'Meetings are conducted in a hybrid format with presentations followed by discussions, fostering collaboration and knowledge sharing.',
+    },
+  ]}
+/>
+
+</Layout>

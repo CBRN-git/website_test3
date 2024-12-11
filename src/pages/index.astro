@@ -1,0 +1,152 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import NextTalk from '../components/widgets/NextTalk.astro';
+import WhyWithUs from '~/components/widgets/WhyWithUs.astro';
+
+const metadata = {
+	title: 'Join Our Community of Readers – Engage, Discuss, Grow',
+	ignoreTitleTemplate: true,
+};
+
+const reasons = [
+  {
+    label: 'Collaborative Learning',
+    description: 'Engage with peers and experts to deepen your understanding and broaden your perspectives.',
+  },
+  {
+    label: 'Expert Speakers',
+    description: 'Learn from industry leaders and renowned professionals who share their knowledge and experience.',
+  },
+  {
+    label: 'Networking Opportunities',
+    description: 'Connect with like-minded individuals and expand your professional network within the community.',
+  },
+  // Add more items as needed
+];
+---
+
+<Layout metadata={metadata}>
+	<!-- Hero Widget ******************* -->
+
+	<Hero
+		actions={[
+			{ text: 'More about format', href: 'howitworks' },
+			{ text: 'More about us', href: '/homes/personal' },
+		]}
+		image={{ src: '~/assets/images/meeting-room.webp', alt: 'Reading group representation' }}
+	>
+		<Fragment slot="title">
+			Join Our Community of Readers
+		</Fragment>
+
+		<Fragment slot="subtitle">
+			<span class="hidden sm:inline">
+				<span class="font-semibold">The Mila Biology + AI reading group </span> discusses papers at the intersection of Biology and Artificial Intelligence. While one of the key themes of the reading group is machine learning applications in bioinformatics, we welcome machine learning-related papers dealing with any branch of biology, including ecology, evolutionary biology, conservation biology, physiology, etc.</span
+			>
+		</Fragment>
+	</Hero>
+
+    <!-- Next Talk Widget -->
+    <section class="my-8">
+      <NextTalk> />
+    </section>
+
+		<WhyWithUs
+		isReversed
+    tagline="Why Participating with Us?"
+    title="Discuss, Learn, Network"
+    reasons={reasons}
+    columns={1}
+    isDark={false}
+    id="why-with-us"
+    classes={{
+      container: 'py-8',
+    }}
+    bg=""
+  >
+  </WhyWithUs>
+
+<!-- Stats Widget ****************** -->
+
+<Stats
+	stats={[
+		{ title: 'Years of Existence', amount: '5+' },
+		{ title: 'Papers Discussed', amount: '150+' },
+		{ title: 'Average Attendance per Meeting', amount: '10+' },
+		{ title: 'Record Attendance', amount: '106' },
+		{ title: 'Guest Speakers Hosted', amount: '100+' }
+	]}
+/>
+
+
+	<!-- Testimonials Widget *********** -->
+
+	<Testimonials
+		title="Previous speakers and attendees testimonials"
+		subtitle="Discover what speakers and attendees have to say about their experiences discussing at the BioAI-rg."
+		testimonials={[
+			{
+	testimonial: `As a PhD candidate, these sessions have helped me become more comfortable analyzing complex research. The group’s open discussions encourage me to ask questions, share my thoughts, and refine my critical thinking skills. I’ve become a more confident scholar thanks to this supportive environment.`,
+	name: 'Dual A.P.I (not real person)',
+	job: 'Average feedbacks from PhD Candidates',
+	image: {
+		src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
+		alt: 'Elena Rodriguez Image',
+	},
+},
+{
+	testimonial: `I find the collaborative atmosphere truly energizing. As a professor, I value the diversity of thought and active participation. Students, postdocs, and professionals from various fields bring fresh insights that keep me informed and inspire new directions in my teaching and research.`,
+	name: 'Jorja Smitha (not real person)',
+	job: 'Average feedbacks from Professors',
+	image: {
+		src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+		alt: 'Mary Simmons Image',
+	},
+},
+{
+	testimonial: `From an industry standpoint, staying connected with cutting-edge research is crucial. These sessions help me quickly grasp emerging trends and methodologies. The balanced mix of academic rigor and open dialogue ensures I gain insights that can be directly applied to our company’s innovation strategies.`,
+	name: 'Hey René (not real person)',
+	job: 'Average feedbacks from CEOs',
+	image: {
+		src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
+		alt: 'Jonathan Park Image',
+	},
+},
+		]}
+	/>
+
+	
+	<!-- CallToAction Widget *********** -->
+
+	<CallToAction
+		actions={[
+			{
+				variant: 'primary',
+				text: 'Connect with our organizers',
+				href: '/team',
+				target: '_blank',
+				icon: 'tabler:user-share',
+			},
+		]}
+	>
+		<Fragment slot="title">
+			We know you do not want to miss any talks now ...
+		</Fragment>
+
+		<Fragment slot="subtitle">
+			Stay up to date to attend to your favourite talks: <br class="hidden md:inline" /> Connect with our friendly organizers and ask for Slack invitation or just scroll your LinkedIn, we will post about future talks !
+		</Fragment>
+	</CallToAction>
+</Layout>

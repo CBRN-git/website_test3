@@ -1,0 +1,134 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components'; // Import the Icon component
+---
+<Layout title="Mila Biology + AI Reading Group">
+  <section class="py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <!-- Description Section -->
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold mb-4">Description</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          The Mila Biology + AI Reading Group delves into research papers that sit at the intersection of biology and artificial intelligence. While our primary focus is on machine learning applications in bioinformatics, we also welcome machine learning-related studies across various biological disciplines, including ecology, evolutionary biology, conservation biology, physiology, and more.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Our group is open to anyone engaged in or interested in tackling problems that bridge these fields. Expertise in both biology and machine learning is advantageous but not mandatory. We strive to create a welcoming environment where members can connect, share insights, and foster meaningful collaborations.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300">
+          Please note that our focus generally excludes medical and neuroscience-related papers. For these topics, refer to our dedicated <a href="#" class="text-blue-600 dark:text-blue-400 underline">Medical Reading Group</a> and <a href="#" class="text-blue-600 dark:text-blue-400 underline">Neural-AI Reading Group</a>.
+        </p>
+      </div>
+
+      <!-- When and How We Meet Section -->
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold mb-4">When and How We Meet</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          <strong>Hybrid Meetings:</strong> We conduct our sessions both virtually via GoogleMeet/Zoom and in-person at Mila.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Our group convenes biweekly, typically from 3:00 PM to 4:00 PM. We kindly ask participants to be punctual and arrive a few minutes early to ensure a timely start. Respect for the speaker and fellow attendees is paramount, mirroring the etiquette of in-person presentations.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mt-2">
+          For specific meeting dates and times, please refer to our published <a href="/talks" class="text-blue-600 dark:text-blue-400 underline">Talks page</a>.
+        </p>
+      </div>
+
+      <!-- Meeting Format Section -->
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold mb-4">Meeting Format</h2>
+        <div class="space-y-6">
+          <!-- Option A -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:file-description" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Option A: Paper Presentation</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                A group member will present a selected research paper from the literature (approximately 20 minutes). This will be followed by an open discussion, allowing attendees to share insights, ask questions, and explore the paper's implications.
+              </p>
+            </div>
+          </div>
+
+          <!-- Option B -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:microphone" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Option B: Speaker Presentation</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                A guest speaker will present their own research work to the group. Presentations are flexible in length, up to a maximum of 50 minutes, and will be followed by a comprehensive discussion. This format provides an opportunity for speakers to showcase their work and receive feedback from peers.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="mt-6">
+          <p class="text-lg text-gray-700 dark:text-gray-300">
+            We encourage all attendees to read the assigned paper before the meeting. Both presenters and participants should come prepared with observations, questions, and comments to enrich the discussion and facilitate a deeper understanding of the material.
+          </p>
+        </div>
+      </div>
+
+      <!-- Who Can Be a Speaker Section -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4">Who Can Be a Speaker</h2>
+        <div class="space-y-6">
+          <!-- PhD Student -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:user" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">PhD Students</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                PhD students bring fresh perspectives and cutting-edge research insights, enriching our discussions with their ongoing work and innovative ideas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Post-Doctoral Researchers -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:user" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Post-Doctoral Researchers</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                Post-doctoral researchers offer advanced expertise and innovative approaches to challenges at the intersection of biology and AI, fostering deeper exploration and understanding.
+              </p>
+            </div>
+          </div>
+
+          <!-- Principal Investigators -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:user" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Principal Investigators</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                Principal Investigators share their extensive experience and leadership in the fields of biology and AI, guiding conversations and inspiring collaborative efforts.
+              </p>
+            </div>
+          </div>
+
+          <!-- Industry Professionals -->
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <Icon name="tabler:user" class="h-6 w-6 text-blue-600 dark:text-blue-700" aria-hidden="true" />
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Industry Professionals</h3>
+              <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">
+                Industry professionals provide practical applications and real-world solutions, bridging the gap between academic research and industry needs in the realm of biological AI.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

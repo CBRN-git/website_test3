@@ -1,0 +1,53 @@
+---
+import Headline from '../ui/Headline.astro';
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import ItemGrid from '../ui/ItemGrid.astro';
+
+const {
+  tagline,
+  title,
+  reasons = [],
+  columns = 1,
+  id,
+  isDark = false,
+  classes = {},
+  bg = '',
+} = Astro.props;
+
+// Map reasons to match ItemGrid's expected structure
+const mappedItems = reasons.map(item => ({
+  title: item.label,
+  description: item.description,
+}));
+---
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}
+  bg={bg}
+>
+  <Headline
+    tagline={tagline}
+    title={title}
+    classes={{
+      container: 'max-w-3xl mx-auto text-center',
+      title: 'text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+      subtitle: 'text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+    }}
+  />
+  <div class="flex justify-center">
+    <ItemGrid
+      items={mappedItems}
+      columns={columns}
+      defaultIcon="tabler:check"
+      classes={{
+        container: `gap-y-4 md:gap-y-8`,
+        panel: 'max-w-none flex flex-row items-start gap-x-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+        title: 'text-lg font-medium leading-6 dark:text-white',
+        description: 'text-muted dark:text-slate-400',
+        icon: 'flex h-7 w-7 items-center justify-center rounded-full bg-green-600 dark:bg-green-700 text-gray-50 p-1',
+        action: 'text-lg font-medium leading-6 dark:text-white',
+      }}
+    />
+  </div>
+</WidgetWrapper>

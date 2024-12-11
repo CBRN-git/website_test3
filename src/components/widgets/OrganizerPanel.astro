@@ -1,0 +1,70 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const {
+  name,
+  affiliation,
+  bio,
+  image, // This can be a local path or an online URL
+  social = {}, // Default to an empty object if social is undefined
+} = Astro.props;
+
+const { linkedin, googleScholar, website } = social;
+---
+
+<div class="flex flex-col items-center text-center p-6 rounded-lg shadow-none intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+  <!-- Organizer Image -->
+  <img
+    src={image}
+    alt={`${name}'s Portrait`}
+    loading="lazy"
+    onError={(e) => (e.currentTarget.src = '/images/default-avatar.jpg')}
+    class="w-32 h-32 object-cover rounded-full mb-4"
+  />
+
+  <!-- Organizer Name -->
+  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">{name}</h3>
+
+  <!-- Organizer Affiliation -->
+  <p class="text-lg text-blue-600 dark:text-blue-400 mb-3">{affiliation}</p>
+
+  <!-- Organizer Bio -->
+  <p class="text-base text-gray-700 dark:text-gray-300 mb-4">{bio}</p>
+
+  <!-- Social Links -->
+  <div class="flex space-x-4">
+    {linkedin && (
+      <a
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+        aria-label={`${name}'s LinkedIn`}
+      >
+        <Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+      </a>
+    )}
+    {googleScholar && (
+      <a
+        href={googleScholar}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+        aria-label={`${name}'s Google Scholar`}
+      >
+        <Icon name="tabler:brand-google" class="w-6 h-6" />
+      </a>
+    )}
+    {website && (
+      <a
+        href={website}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+        aria-label={`${name}'s Website`}
+      >
+        <Icon name="tabler:link" class="w-6 h-6" />
+      </a>
+    )}
+  </div>
+</div>

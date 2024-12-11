@@ -1,0 +1,53 @@
+---
+/* ProcessSteps.astro */
+
+import { Icon } from 'astro-icon/components'; // Ensure astro-icon is correctly installed and configured
+
+// Define the structure of each step
+interface Step {
+  title: string;
+  description: string;
+  icon: string; // Icon identifier from astro-icon
+}
+
+export interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+<section id="process-steps" class="py-12 bg-gray-50 dark:bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Title -->
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-white mb-8">
+      Speaker Guidelines Process
+    </h2>
+
+    <!-- Steps Container -->
+    <div class="relative">
+      <!-- Vertical Line -->
+      <div class="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300 dark:border-gray-600"></div>
+
+      <ul class="space-y-12">
+        {steps.map((step, index) => (
+          <li key={index} class="relative md:flex md:items-center">
+            {/* Marker */}
+            <div class="absolute md:static -left-1/2 md:mx-0 flex justify-center items-center w-12 h-12 bg-blue-500 rounded-full shadow-lg text-white">
+              <Icon name={step.icon} class="w-6 h-6" />
+            </div>
+
+            {/* Step Content */}
+            <div class="mt-4 md:mt-0 md:ml-8">
+              <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                {step.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                {step.description}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

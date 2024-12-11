@@ -1,0 +1,134 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import OrganizerPanel from '~/components/widgets/OrganizerPanel.astro';
+import CreditList from '~/components/widgets/CreditList.astro'; // Adjust the path based on your directory structure
+
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'About Us - Mila Biology + AI Reading Group',
+};
+
+const organizers = [
+  {
+    name: 'David Hamelin',
+    affiliation: 'Mila, Université de Montréal, Institut de Cardiologie de Montréal',
+    bio: 'Supported by a great mentor and surrounded by brilliant collaborators, I am currently leading a disruptive project aimed at developing a deeper understanding of SARS-CoV-2\'s impact on our immune systems. We are doing so using a combination of machine learning tools, as well as computational and experimental immunology.',
+    image: 'https://i1.rgstatic.net/ii/profile.image/1162398958399488-1654148916305_Q512/David-Hamelin-2.jpg',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/david-hamelin-a37b24177/',
+      googleScholar: 'https://scholar.google.ca/citations?user=CLqVlV0AAAAJ&hl=en&oi=ao',
+      website: 'https://mhi-omics.org/',
+    },
+  },
+  {
+    name: 'Cantin Baron',
+    affiliation: 'Mila, Université de Montréal, Institut de Cardiologie de Montréal',
+    bio: 'Ph.D. candidate passionate about AI and big data in disease contexts to move precision medicine further.',
+    image: 'https://mila.quebec/sites/default/files/styles/member_full/public/member/10344/portrait-of-cantin-baron.jpeg.webp?itok=gViWY6Wf',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/cantinbaron/',
+      googleScholar: 'https://scholar.google.ca/citations?user=mPYkpI0AAAAJ&hl=en&oi=ao',
+      website: 'https://mhi-omics.org/',
+    },
+  },
+  {
+    name: 'Joseph D Viviano',
+    affiliation: 'Mila',
+    bio: 'I have over 10 years of applied research experience spanning multiple domains, and have consistently demonstrated my ability to learn on my feet. I\'m fascinated by the use of machine learning to accelerate our understanding of the natural sciences, particularly biology, with an eye on biomanufacturing, agriculture, and healthcare applications.',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBITIA0l3i-3HsPyLMT1TStNY2_y5NGFNDegc6tGBLmBX8PoCyNv3YxvVpayhgLdR_tmg&usqp=CAU',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/josephdviviano/',
+      googleScholar: 'https://scholar.google.ca/citations?user=Jd7wEJ8AAAAJ&hl=en&oi=ao',
+      // website is intentionally omitted as per provided data
+    },
+  },
+  // Add more organizers as needed
+];
+
+const pastOrganizers = [
+  {
+    name: "Matt Scicluna",
+    social: {
+      linkedin: "https://linkedin.com/in/mattscicluna",
+      twitter: "https://twitter.com/mattscicluna",
+      website: "https://mattscicluna.com"
+    }
+  },
+  {
+    name: "Marc-Andre Legault",
+    social: {
+      linkedin: "https://linkedin.com/in/marc-andre-legault",
+      website: "https://marcandrelegault.com"
+    }
+  },
+  {
+    name: "Natasha Dudek",
+    social: {
+      linkedin: "https://linkedin.com/in/natashadudek",
+      twitter: "https://twitter.com/natashadudek"
+    }
+  },
+  {
+    name: "Camille Rochefort-Boulanger",
+    social: {
+      linkedin: "https://linkedin.com/in/camillerochefort-boulanger",
+      website: "https://camillerochefort.com"
+    }
+  },
+  {
+    name: "Alexis Nolin Lapalme",
+    social: {
+      linkedin: "https://linkedin.com/in/alexisnolinlapalme",
+      twitter: "https://twitter.com/alexislapalme",
+      website: "https://alexislapalme.com"
+    }
+  },
+];
+---
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero
+    id="hero"
+    title="Organizers"
+  >
+    <Fragment slot="subtitle">
+      We’re a team of dedicated individuals committed to fostering insightful discussions, critical thinking, and collaborative exploration of the latest research in biology and AI.
+      Each meeting is an opportunity to learn from diverse perspectives—whether you’re a student, a researcher, or a professional, you’ll find valuable insights and supportive peers.
+      Meet the organizers!
+    </Fragment>
+  </Hero>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {organizers.map((organizer) => (
+          <OrganizerPanel
+            key={organizer.name}
+            name={organizer.name}
+            affiliation={organizer.affiliation}
+            bio={organizer.bio}
+            image={organizer.image}
+            social={organizer.social}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Hero
+    id="hero"
+    title="Past Organizers"
+  >
+    <Fragment slot="subtitle">
+        Thanks to them for their invaluable contributions!
+      <CreditList organizers={pastOrganizers} />
+    </Fragment>
+</Hero>
+</Layout>
+

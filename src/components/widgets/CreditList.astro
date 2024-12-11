@@ -1,0 +1,99 @@
+---
+/* CreditList.astro */
+
+import { Icon } from 'astro-icon/components'; // Ensure astro-icon is correctly installed and configured
+
+// Define the structure of each organizer item
+interface Organizer {
+  name: string;
+  social?: {
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+    // Add other social platforms as needed
+  };
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  organizers: Organizer[];
+}
+
+const { title, subtitle, organizers } = Astro.props;
+---
+<section id="past-organizers" class="py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Title (Removed as per request) -->
+    {/*
+    {title && (
+      <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white text-center">
+        {title}
+      </h2>
+    )}
+    */}
+
+    <!-- Section Subtitle (Removed as per request) -->
+    {/*
+    {subtitle && (
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 text-center">
+        {subtitle}
+      </p>
+    )}
+    */}
+
+    <!-- Organizers List with Fade-In Animation -->
+    <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+      <ul class="mt-8 space-y-6 max-w-md mx-auto">
+        {organizers.map((organizer, index) => (
+          <li key={index} class="flex flex-col items-center">
+            <!-- Organizer Name -->
+            <span class="text-gray-700 dark:text-gray-200 text-center text-xl font-medium">
+              {organizer.name}
+            </span>
+
+            <!-- Social Links (If any) -->
+            {organizer.social && (
+              <div class="mt-2 flex space-x-4">
+                {organizer.social.linkedin && (
+                  <a
+                    href={organizer.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+                    aria-label={`${organizer.name}'s LinkedIn`}
+                  >
+                    <Icon name="tabler:brand-linkedin" class="w-5 h-5" />
+                  </a>
+                )}
+                {organizer.social.twitter && (
+                  <a
+                    href={organizer.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+                    aria-label={`${organizer.name}'s Twitter`}
+                  >
+                    <Icon name="tabler:brand-twitter" class="w-5 h-5" />
+                  </a>
+                )}
+                {organizer.social.website && (
+                  <a
+                    href={organizer.social.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+                    aria-label={`${organizer.name}'s Website`}
+                  >
+                    <Icon name="tabler:link" class="w-5 h-5" />
+                  </a>
+                )}
+                {/* Add more social links as needed */}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
