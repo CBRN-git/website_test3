@@ -1,32 +1,41 @@
-name: Deploy Astro Site
+name: Deploy Astro to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Update this to your default branch if different
+      - main
 
 jobs:
-  deploy:
+  build:
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20' # Use the Node.js version you're using locally
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: npm ci
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build the site
-      run: npm run build
+      # Build the project
+      - name: Build the project
+        run: npm run build
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
-        publish_branch: gh-pages  # This will ensure the `gh-pages` branch is used
+      # Ensure `.nojekyll` is in the `dist` folder
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
