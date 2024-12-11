@@ -1,34 +1,48 @@
+# .github/workflows/deploy.yml
+
 name: Deploy Astro to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Replace with your default branch if different
+      - main  # Ensure this matches your default branch
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 2: Setup Node.js environment
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: List repository files for debugging
+      - name: List Repository Files
+        run: |
+          echo "Listing files in the repository root:"
+          ls -al
+          echo "Listing files recursively:"
+          ls -alR
+
+      # Step 3: Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Specify your Node.js version
+          node-version: '16'  # Specify your Node.js version
 
-      # Step 3: Install dependencies
+      # Step 4: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Build the Astro project
+      # Step 5: Build the Astro project
       - name: Build
         run: npm run build
 
-      # Step 5: Create .nojekyll file
+      # Step 6: Create .nojekyll file
       - name: Create .nojekyll
         run: echo > dist/.nojekyll
 
-      # Step 6: Deploy to GitHub Pages
+      # Step 7: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
