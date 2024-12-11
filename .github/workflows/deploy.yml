@@ -1,11 +1,12 @@
-# .github/workflows/deploy.yml
-
 name: Deploy Astro to GitHub Pages
 
 on:
   push:
     branches:
       - main  # Ensure this matches your default branch
+
+permissions:
+  contents: write  # Grants write access to repository contents
 
 jobs:
   build-and-deploy:
@@ -28,21 +29,32 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'  # Updated to a supported version
+          node-version: '18.x'  # Updated to a supported version
 
-      # Step 4: Install dependencies
+      # Step 4: Cache node modules
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 5: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 5: Build the Astro project
+      # Step 6: Build the Astro project
       - name: Build
         run: npm run build
 
-      # Step 6: Create .nojekyll file
+      # Step 7: Create .nojekyll file
       - name: Create .nojekyll
         run: echo > dist/.nojekyll
 
-      # Step 7: Deploy to GitHub Pages
+      # Step 8: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
