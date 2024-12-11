@@ -54,7 +54,11 @@ jobs:
       - name: Create .nojekyll
         run: echo > dist/.nojekyll
 
-      # Step 8: Deploy to GitHub Pages
+      # Step 8: Create CNAME file
+      - name: Create CNAME
+        run: echo "www.bioai-rg.com" > dist/CNAME  # Replace with your actual domain
+
+      # Step 9: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
