@@ -417,6 +417,13 @@ declare module 'astro:content' {
   collection: "post";
   data: any
 } & { render(): Render[".md"] };
+"talks/fwefwe copy 3.md": {
+	id: "talks/fwefwe copy 3.md";
+  slug: "talks/fwefwe-copy-3";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 "talks/fwefwe copy.md": {
 	id: "talks/fwefwe copy.md";
   slug: "talks/fwefwe-copy";
