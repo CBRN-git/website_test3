@@ -1,0 +1,74 @@
+name: Deploy Astro to GitHub Pages
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
+  # Optional: Allow manual triggering
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Grants write access to repository contents
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Important if using a PAT
+          fetch-depth: 0              # Fetch full history
+
+      # Step 2: Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'  # Specify your Node.js version
+
+      # Step 3: Cache node modules
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 4: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 5: Build the Astro project
+      - name: Build
+        run: npm run build
+
+      # Step 6: Create .nojekyll file
+      - name: Create .nojekyll
+        run: echo > dist/.nojekyll
+
+      # Step 7: Create CNAME file
+      - name: Create CNAME
+        run: echo "www.bioai-rg.com" > dist/CNAME  # Replace with your actual domain
+
+      # Step 8: Configure Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 9: Commit Dist Folder
+      - name: Commit Dist Folder
+        run: |
+          git add dist
+          git commit -m "Update dist folder [skip ci]" || echo "No changes to commit"
+
+      # Step 10: Push Changes
+      - name: Push Changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.PAT_TOKEN }}  # Use PAT_TOKEN if needed
+          branch: main  # Replace with your target branch if different
