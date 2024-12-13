@@ -22,8 +22,8 @@ const upcomingTalks = sortedTalks.filter((talk) => new Date(talk.data.date) >= c
 const pastTalks = [...sortedTalks.filter((talk) => new Date(talk.data.date) < currentDate)].reverse();
 
 // Log categorized talks for debugging (optional)
-console.log('Upcoming Talks:', upcomingTalks);
-console.log('Past Talks:', pastTalks);
+// console.log('Upcoming Talks:', upcomingTalks);
+// console.log('Past Talks:', pastTalks);
 ---
 <Layout metadata={metadata}>
 
@@ -77,7 +77,7 @@ console.log('Past Talks:', pastTalks);
                 </div>
                 <!-- Spacer -->
                 <div class="mt-4"></div>
-                
+
                 <!-- Abstract -->
                 <div class="flex items-start mb-4">
                   <Icon name="tabler:align-left" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2 mt-1" aria-hidden="true" />
