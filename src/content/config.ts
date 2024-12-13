@@ -54,6 +54,7 @@ const talksCollection = defineCollection({
     titlePresentation: z.string(), // Required for talks
     date: z.date(), // Required and parsed as a date
     speaker: z.string(), // Required
+    biography: z.string(), // Required
     abstract: z.string(), // Required
 
     // Optional Fields

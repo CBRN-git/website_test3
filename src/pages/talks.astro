@@ -3,17 +3,13 @@ import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro'; // Correct Layout import
 import Hero from '~/components/widgets/Hero.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import { getPermalink } from '~/utils/permalinks';
+
 const metadata = {
   title: 'About Us - Mila Biology + AI Reading Group',
 };
 
 // Fetch all posts of type 'talk' from the 'post' collection
 const talks = await getCollection('post', ({ data }) => data.type === 'talk');
-
-// Log fetched talks for debugging
-//console.log('Fetched Talks:', talks);
 
 // Sort talks by date ascending
 const sortedTalks = talks.sort((a, b) => new Date(a.data.date) - new Date(b.data.date));
@@ -25,35 +21,33 @@ const currentDate = new Date();
 const upcomingTalks = sortedTalks.filter((talk) => new Date(talk.data.date) >= currentDate);
 const pastTalks = [...sortedTalks.filter((talk) => new Date(talk.data.date) < currentDate)].reverse();
 
-// Log categorized talks for debugging
-//console.log('Upcoming Talks:', upcomingTalks);
-//console.log('Past Talks:', pastTalks);
+// Log categorized talks for debugging (optional)
+console.log('Upcoming Talks:', upcomingTalks);
+console.log('Past Talks:', pastTalks);
 ---
-
 <Layout metadata={metadata}>
 
-
-<!-- Hero Widget ******************* -->
-<Hero
-    id="hero"
-    title="Upcoming Talks"
->
-    <Fragment slot="subtitle">
-      Find details about the next talk and what’s coming up. <br> (Hey, we tell you a little secret : there are past talks below this section 🤫)
-    </Fragment>
-</Hero>
-
-  <section class="py-12">
-    <div class="container mx-auto px-4">
-      <!-- Upcoming Talks -->
-      <div class="mb-12">
+  <!-- Upcoming Talks Section with Synchronized Fade-In Animation -->
+  <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+    
+    <!-- Hero Widget for Upcoming Talks -->
+    <Hero id="hero-upcoming" title="Upcoming Talks">
+      <p slot="subtitle">
+        Find details about the next talk and what’s coming up. <br />
+        (Hey, we tell you a little secret: there are past talks below this section 🤫)
+      </p>
+    </Hero>
+    
+    <!-- Upcoming Talks Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-4">
         {upcomingTalks.length > 0 ? (
           <ul class="space-y-6">
             {upcomingTalks.map((talk) => (
               <li key={talk.slug} class="p-6 rounded-lg shadow-md">
                 <!-- Title Presentation -->
                 <div class="flex items-center mb-2">
-                  <Icon name="tabler:book" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
+                  <Icon name="tabler:book" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
                   <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">
                     {talk.data.titlePresentation}
                   </h3>
@@ -61,7 +55,7 @@ const pastTalks = [...sortedTalks.filter((talk) => new Date(talk.data.date) < cu
 
                 <!-- Date -->
                 <div class="flex items-center mb-2">
-                  <Icon name="tabler:calendar-event" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
+                  <Icon name="tabler:calendar-event" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
                   <p class="text-sm text-gray-600 dark:text-gray-300">
                     {new Date(talk.data.date).toLocaleDateString(undefined, {
                       year: 'numeric',
@@ -71,12 +65,19 @@ const pastTalks = [...sortedTalks.filter((talk) => new Date(talk.data.date) < cu
                   </p>
                 </div>
 
-                <!-- Speaker -->
-                <div class="flex items-center mb-4">
-                  <Icon name="tabler:user" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
+                <!-- Speaker Information -->
+                <div class="flex items-center mb-2">
+                  <Icon name="tabler:user" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
                   <p class="text-sm text-gray-700 dark:text-gray-200">{talk.data.speaker}</p>
                 </div>
 
+                <!-- Biography -->
+                <div class="ml-7">
+                  <p class="text-sm text-gray-700 dark:text-gray-200">{talk.data.biography}</p>
+                </div>
+                <!-- Spacer -->
+                <div class="mt-4"></div>
+                
                 <!-- Abstract -->
                 <div class="flex items-start mb-4">
                   <Icon name="tabler:align-left" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2 mt-1" aria-hidden="true" />
@@ -114,88 +115,89 @@ const pastTalks = [...sortedTalks.filter((talk) => new Date(talk.data.date) < cu
           <p class="text-gray-600 dark:text-gray-300">No upcoming talks at the moment.</p>
         )}
       </div>
-  </section>
-
-<Hero
-  id="hero"
-  title="Past Talks"
->
-  <Fragment slot="subtitle">
-  Look back at previous talks and speakers, thanks again to all of you 💖 !
-  </Fragment>
-</Hero>
-
-<section class="py-12">
-  <div class="container mx-auto px-4">
-  <!-- Past Talks -->
-  <div>
-    {pastTalks.length > 0 ? (
-      <ul class="space-y-6">
-        {pastTalks.map((talk) => (
-          <li key={talk.slug} class="p-6 rounded-lg shadow-md">
-            <!-- Title Presentation -->
-            <div class="flex items-center mb-2">
-              <Icon name="tabler:book" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
-              <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">
-                {talk.data.titlePresentation}
-              </h3>
-            </div>
-
-            <!-- Date -->
-            <div class="flex items-center mb-2">
-              <Icon name="tabler:calendar-event" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
-              <p class="text-sm text-gray-600 dark:text-gray-300">
-                {new Date(talk.data.date).toLocaleDateString(undefined, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-            </div>
-
-            <!-- Speaker -->
-            <div class="flex items-center mb-4">
-              <Icon name="tabler:user" class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" />
-              <p class="text-sm text-gray-700 dark:text-gray-200">{talk.data.speaker}</p>
-            </div>
-
-            <!-- Abstract -->
-            <div class="flex items-start mb-4">
-              <Icon name="tabler:align-left" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2 mt-1" aria-hidden="true" />
-              <p class="text-gray-600 dark:text-gray-300">{talk.data.abstract}</p>
-            </div>
-
-            <!-- Papers -->
-            {talk.data.papers && talk.data.papers.length > 0 && (
-              <div>
-                <h4 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">Papers:</h4>
-                <ul class="list-disc list-inside space-y-1">
-                  {talk.data.papers.map((paper, index) => (
-                    <li key={index}>
-                      {paper.url ? (
-                        <a
-                          href={paper.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="text-blue-600 dark:text-blue-400 hover:underline"
-                        >
-                          {paper.titlePaper}
-                        </a>
-                      ) : (
-                        <span class="text-gray-700 dark:text-gray-300">{paper.titlePaper}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p class="text-gray-600 dark:text-gray-300">No past talks available.</p>
-    )}
+    </section>
   </div>
-</div>
-</section>
+
+  <!-- Past Talks Section with Synchronized Fade-In Animation -->
+  <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+   
+    <!-- Hero Widget for Past Talks -->
+    <Hero id="hero-past" title="Past Talks">
+      <p slot="subtitle">
+        Look back at previous talks and speakers, thanks again to all of you 💖!
+      </p>
+    </Hero>
+  </div> 
+    <!-- Past Talks Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-4">
+        {pastTalks.length > 0 ? (
+          <ul class="space-y-6">
+            {pastTalks.map((talk) => (
+              <li key={talk.slug} class="p-6 rounded-lg shadow-md">
+                <!-- Title Presentation -->
+                <div class="flex items-center mb-2">
+                  <Icon name="tabler:book" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
+                  <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                    {talk.data.titlePresentation}
+                  </h3>
+                </div>
+
+                <!-- Date -->
+                <div class="flex items-center mb-2">
+                  <Icon name="tabler:calendar-event" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
+                  <p class="text-sm text-gray-600 dark:text-gray-300">
+                    {new Date(talk.data.date).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
+                </div>
+
+                <!-- Speaker -->
+                <div class="flex items-center mb-4">
+                  <Icon name="tabler:user" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" aria-hidden="true" />
+                  <p class="text-sm text-gray-700 dark:text-gray-200">{talk.data.speaker}</p>
+                </div>
+
+                <!-- Abstract -->
+                <div class="flex items-start mb-4">
+                  <Icon name="tabler:align-left" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2 mt-1" aria-hidden="true" />
+                  <p class="text-gray-600 dark:text-gray-300">{talk.data.abstract}</p>
+                </div>
+
+                <!-- Papers -->
+                {talk.data.papers && talk.data.papers.length > 0 && (
+                  <div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">Papers:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                      {talk.data.papers.map((paper, index) => (
+                        <li key={index}>
+                          {paper.url ? (
+                            <a
+                              href={paper.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="text-blue-600 dark:text-blue-400 hover:underline"
+                            >
+                              {paper.titlePaper}
+                            </a>
+                          ) : (
+                            <span class="text-gray-700 dark:text-gray-300">{paper.titlePaper}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-gray-600 dark:text-gray-300">No past talks available.</p>
+        )}
+      </div>
+    </section>
+
 </Layout>

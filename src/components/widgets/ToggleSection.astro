@@ -1,0 +1,60 @@
+---
+const { id, title, initiallyOpen = false } = Astro.props;
+---
+
+<div class="toggle-section">
+  <button
+    id={`toggle-button-${id}`}
+    class="flex items-center justify-between w-full text-left text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
+    aria-expanded={initiallyOpen ? 'true' : 'false'}
+    aria-controls={`toggle-content-${id}`}
+    type="button"
+  >
+    <span>{initiallyOpen ? `Hide ${title}` : `Show ${title}`}</span>
+    <!-- Icon indicating toggle state -->
+    <svg
+      class={`w-5 h-5 transition-transform duration-300 ${initiallyOpen ? 'transform rotate-180' : ''}`}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div
+    id={`toggle-content-${id}`}
+    class={`mt-2 text-gray-600 dark:text-gray-300 transition-all duration-500 ease-in-out overflow-hidden ${
+      initiallyOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+    }`}
+    aria-labelledby={`toggle-button-${id}`}
+  >
+    <slot />
+  </div>
+</div>
+
+<script type="module" client:load>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById(`toggle-button-${id}`);
+    const content = document.getElementById(`toggle-content-${id}`);
+    const svg = button.querySelector('svg');
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', !isExpanded);
+
+      if (isExpanded) {
+        content.classList.remove('max-h-96', 'opacity-100');
+        content.classList.add('max-h-0', 'opacity-0');
+        svg.classList.remove('rotate-180');
+        button.querySelector('span').textContent = `Show ${title}`;
+      } else {
+        content.classList.remove('max-h-0', 'opacity-0');
+        content.classList.add('max-h-96', 'opacity-100');
+        svg.classList.add('rotate-180');
+        button.querySelector('span').textContent = `Hide ${title}`;
+      }
+    });
+  });
+</script>

@@ -26,15 +26,17 @@ const nextTalk = sortedTalks.find((talk) => new Date(talk.data.date) >= currentD
       <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
         {nextTalk ? (
           <>
-            {/* Subtitle */}
-            <p class="text-lg text-secondary dark:text-blue-200 font-bold tracking-wide uppercase mb-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              The Next Talk
-            </p>
+            {/* Tagline */}
+            <p
+              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html="The Next Talk"
+            ></p>
 
-            {/* Title Presentation */}
-            <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              {nextTalk.data.titlePresentation}
-            </h1>
+            {/* Title */}
+            <h1
+              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html={nextTalk.data.titlePresentation}
+            ></h1>
 
             {/* Date and Time */}
             <div class="flex justify-center items-center space-x-4 mb-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
@@ -67,6 +69,15 @@ const nextTalk = sortedTalks.find((talk) => new Date(talk.data.date) >= currentD
               </span>
             </div>
 
+            {/* Speaker Biography */}
+            <div class="flex justify-center items-center space-x-2 mb-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <span class="text-md text-gray-700 dark:text-gray-300">
+                {nextTalk.data.biography}
+              </span>
+            </div>
+
+            
+
             {/* Action Buttons */}
             <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
               <div class="flex w-full sm:w-auto">
@@ -83,15 +94,17 @@ const nextTalk = sortedTalks.find((talk) => new Date(talk.data.date) >= currentD
           </>
         ) : (
           <>
-            {/* Subtitle */}
-            <p class="text-lg text-secondary dark:text-blue-200 font-bold tracking-wide uppercase mb-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              No Upcoming Talks
-            </p>
+            {/* Tagline */}
+            <p
+              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html="No Upcoming Talks"
+            ></p>
 
-            {/* Fallback Title */}
-            <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              Stay Tuned for Future Events!
-            </h1>
+            {/* Title */}
+            <h1
+              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html="Stay Tuned for Future Events!"
+            ></h1>
 
             {/* Optional Fallback Content */}
             <p class="text-md text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
@@ -130,4 +143,6 @@ const nextTalk = sortedTalks.find((talk) => new Date(talk.data.date) >= currentD
           />
         </div>
       )}
-    </section>
+    </div>
+  </div>
+</section>

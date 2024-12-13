@@ -1,6 +1,6 @@
 ---
 titlePresentation: Predicting pathogen evolution and immune evasion in the age of artificial intelligence
-date: 2025-12-11
+date: 2027-12-12
 time : "16:30"
 speaker: Dr. Hamelin David
 abstract: >
